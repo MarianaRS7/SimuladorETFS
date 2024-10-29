@@ -93,10 +93,12 @@ def traducir_texto(texto):
         return 'Traducción no disponible'
 
 def obtener_precio_actual(ticker):
-    """Obtiene el precio actual de un ETF dado su ticker."""
+    """Obtiene el precio de cierre más reciente de un ETF o acción dado su ticker."""
     try:
+        # Crear el objeto del ticker
         accion = yf.Ticker(ticker)
-        precio_actual = accion.history(period='1d')['Close'].iloc[-1]  # Obtener el precio de cierre más reciente
+        # Descargar el precio de cierre del último día de negociación
+        precio_actual = accion.history(period='1d')['Close'].iloc[-1]
         return precio_actual
     except Exception as e:
         print(f"Error al obtener el precio actual para {ticker}: {e}")
